@@ -114,3 +114,7 @@ input[type="checkbox"].ch2:checked:after {
   border: 1px solid lightcoral;
   outline: none;
 }
+
+.line {
+  text-decoration-line: line-through;
+}

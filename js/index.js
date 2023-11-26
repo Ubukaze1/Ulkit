@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const universidad = document.getElementById("universidad");
   const personal = document.getElementById("personal");
   let eliminar = document.querySelectorAll("#eliminar");
-  const seleccionado = document.getElementById("seleccionado");
+  let seleccionado = document.querySelectorAll("#seleccionado");
   const lista = document.getElementById("lista");
 
   form.addEventListener("submit", (e) => {
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (personal.checked) {
       ch.className += " ch2";
     }
+    ch.setAttribute("id", "seleccionado");
 
     const intx = document.createElement("input");
     intx.setAttribute("type", "text");
@@ -41,15 +42,27 @@ document.addEventListener("DOMContentLoaded", () => {
     lista.appendChild(div);
 
     eliminar = document.querySelectorAll("#eliminar");
+    seleccionado = document.querySelectorAll("#seleccionado");
 
-    console.log(eliminar);
-
+    /* Aqui hacemos la accion de eliminar la tarea */
     eliminar.forEach((e) => {
       e.addEventListener("click", (e) => {
-        console.log(e)
-        const nd = e.target.parentNode
-        console.log(nd)
-        nd.parentNode.removeChild(nd)
+        const nd = e.target.parentNode;
+        nd.parentNode.removeChild(nd);
+      });
+    });
+
+    /* Aqui hacemos la accion de desabilitar o no con respecto al check*/
+    seleccionado.forEach((e) => {
+      e.addEventListener("change", (e) => {
+        const tx = e.target.nextSibling;
+        if (tx.disabled) {
+          tx.disabled = false;
+          tx.classList.remove('line')
+        } else {
+          tx.disabled = true;
+          tx.className += ' line'
+        }
       });
     });
   });
